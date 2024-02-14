@@ -1,0 +1,21 @@
+#include <ecc.h>
+
+int main (void)
+{
+
+    System_Init();      //Initializes hardware
+
+    float f1 = 0.0123456789;
+    double d1 = 0.0123456789;
+    Uart1_Printf("Value:%f\r\n",f1);
+    Uart1_Printf("Size:%u\r\n",sizeof(f1));
+    Uart1_Printf("Addr:0x%.8X\r\n",&f1);
+    Uart1_Printf("-----------------\n");
+    Uart1_Printf("Value:%f\r\n",d1);
+    Uart1_Printf("Size:%u\r\n",sizeof(d1));
+    Uart1_Printf("Addr:0x%.8X\r\n",&d1);
+    System_Start();
+
+    return 0 ;
+}
+
