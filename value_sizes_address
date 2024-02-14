@@ -1,0 +1,45 @@
+// #include <ecc.h>
+
+// //main function 
+// int main (void)
+// {
+//     char c1 = 'A';
+//     System_Init();      //Initializes hardware
+
+//     //code...
+//     Uart1_Printf("%c",c1);
+    
+//     System_Start();
+
+//     return 0 ;
+// }
+
+#include <ecc.h>
+int main (void){
+    char c1 = 'A';
+    System_Init();
+    //1) Value
+    Uart1_Printf("Value : %c\r\n",c1);
+    //2) Value
+    unsigned int size_c1 =sizeof(c1);
+    Uart1_Printf("Size : %u byte(s)\r\n",size_c1);
+    //3 Address
+    Uart1_Printf("Adddress: %u\r\n",&c1);
+    Uart1_Printf("Adddress: 0x%x\r\n",&c1);
+    Uart1_Printf("Adddress: 0x%X\r\n",&c1);
+    Uart1_Printf("Adddress: 0x%8X\r\n",&c1);
+    Uart1_Printf("Adddress: 0x%.8X\r\n",&c1);
+
+    Uart1_Printf("%d\r\n",1021);
+    Uart1_Printf("%d\r\n",129);
+    Uart1_Printf("%d\r\n",8);
+    Uart1_Printf("%5d\r\n",1021);
+    Uart1_Printf("%5d\r\n",129);
+    Uart1_Printf("%5d\r\n",8);
+    Uart1_Printf("%.5d\r\n",1021);
+    Uart1_Printf("%.5d\r\n",129);
+    Uart1_Printf("%.5d\r\n",8);
+
+    System_Start();
+    return 0 ;
+}
