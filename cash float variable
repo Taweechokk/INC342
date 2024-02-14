@@ -1,0 +1,18 @@
+#include <ecc.h>
+
+int main (void)
+{
+
+    System_Init();      //Initializes hardware
+    // Integer and maths error
+    int x =10;  //cannot change
+    int y =3;   //cannot change
+    //cast : coverts current type to desired type
+    float z = (float)x/(float)y; //0.75
+    Uart1_Printf("%f\r\n",z);
+    
+    System_Start();
+
+    return 0 ;
+}
+
