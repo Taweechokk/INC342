@@ -1,0 +1,29 @@
+#include <ecc.h>
+
+int main (void)
+{
+
+    System_Init();      //Initializes hardware
+    // float z = (float)x/(float)y; 
+    // Uart1_Printf("%f\r\n",z);
+    
+    //Operations Order
+    // float x = 0.0123456789;
+    // float y = 1000000;
+    // float z = 8000000;
+    // Uart1_Printf("%f\r\n",x*y/z);
+    // Uart1_Printf("%f\r\n",(x*y)/z);
+    // Uart1_Printf("%f\r\n",x*(y/z));
+    
+    int i1 =3;
+    int i2 =9;
+    int i3 =30;
+    Uart1_Printf("a1: %i\r\n",i1 * i2/i3);
+    Uart1_Printf("a1: %i\r\n",i1 * (i2/i3));
+    Uart1_Printf("a1: %i\r\n",(i1 * i2)/i3);
+
+    System_Start();
+
+    return 0 ;
+}
+
