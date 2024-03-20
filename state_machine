@@ -1,0 +1,29 @@
+#include <ternion.h>
+
+uint8_t counter = 0;
+
+void fsm_250ms(void *p) {
+    if(counter ==0){
+    //LED0 ON
+    gpio_set_level(GPIO_LED_NUM_0,GPIO_LEVEL_LOW);
+    }
+    //LED0  OFF
+    if(counter == 2){
+    gpio_set_level(GPIO_LED_NUM_0,GPIO_LEVEL_HIGH);
+    }
+    // ternion monitor
+    //_Serial_printf("counter: %d\r\n", counter);
+    counter++;
+
+    if(counter > 4){
+        counter = 0;
+    }
+}
+
+int main(void)
+{
+    ternion_init(NULL);
+    timer_create_interval(TIMER_NUM_0, 100, fsm_250ms);
+    ternion_start(NULL);
+    return 0;
+}
