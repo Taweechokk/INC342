@@ -1,0 +1,25 @@
+#include <ternion.h>
+
+int counter = 0; // global variable
+void abcd(void *p) 
+{
+    counter++;// counter+=1  ---- counter=counter+1
+    if(counter % 4 == 0) {
+        gpio_set_level(GPIO_LED_NUM_0, GPIO_LEVEL_LOW);  
+        gpio_set_level(GPIO_LED_NUM_2, GPIO_LEVEL_HIGH);   
+    }
+    else {
+        gpio_set_level(GPIO_LED_NUM_0, GPIO_LEVEL_HIGH);  
+        gpio_set_level(GPIO_LED_NUM_2, GPIO_LEVEL_LOW);
+    }
+}
+
+
+int main(void)
+{
+    ternion_init(NULL);
+
+    timer_create_interval(TIMER_NUM_0, 250, abcd);
+    ternion_start(NULL);
+    return 0;
+}
