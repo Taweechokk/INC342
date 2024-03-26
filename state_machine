@@ -1,0 +1,55 @@
+#include <ternion.h>
+
+uint8_t counter = 0;
+
+// ไฟกระพริบด้วยความถี่ 0.5Hz มี T_ON น้อยกว่า T_OFF 3 เท่า
+//---
+// F = 0.5 ==> T = 2000ms (T = T_ON + T_OFF) 
+// T_ON  = T/4 = 2000/4 = 500ms
+// T_OFF = T - T_ON = 2000-500 = 1500ms
+// T_ON  =  500 ms
+// T_OFF = 1500 ms
+
+
+void fsm(void *p)
+{
+    counter++;  // 0 1 2 3 0
+
+    // if( counter > 5 ) {
+    //     counter = 0;
+    // }
+
+    if(counter == 1) {
+        gpio_set_level(GPIO_LED_NUM_0, GPIO_LEVEL_LOW); // LED0 ON   
+        gpio_set_level(GPIO_LED_NUM_3, GPIO_LEVEL_HIGH); // LED3 OFF 
+    }
+
+    else if(counter == 3) {
+        gpio_set_level(GPIO_LED_NUM_0, GPIO_LEVEL_HIGH); // LED0 OFF   
+    }
+    else if(counter == 5) {
+        gpio_set_level(GPIO_LED_NUM_3, GPIO_LEVEL_LOW); // LED3 ON   
+        counter = 0;
+    }
+    else{
+        // do nothing
+    }
+    
+    // ternion monitor
+    serial_printf(UART_NUM_1, "counter: %d\r\n", counter);
+}
+
+
+int main(void)
+{
+    ternion_init(NULL);
+    
+    timer_create_interval(TIMER_NUM_0, 100, fsm);
+
+    // START
+    //gpio_set_level(GPIO_LED_NUM_0, GPIO_LEVEL_LOW); // LED0 ON   
+
+    ternion_start(NULL);
+
+    return 0;
+}
